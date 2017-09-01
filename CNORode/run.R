@@ -9,9 +9,16 @@ library(CNORode)
 #     package="CNORode"));
 # cno_data=readMIDAS(system.file("doc", "ToyModelMMB_FeedbackAnd.csv", 
 #     package="CNORode"));
-model=readSIF("ToyModelMMB_FeedbackAnd.sif");
-cno_data=readMIDAS("ToyModelMMB_FeedbackAnd.csv");
+
+#model=readSIF("ToyModelMMB_FeedbackAnd.sif");
+#cno_data=readMIDAS("ToyModelMMB_FeedbackAnd.csv");
+
+model=readSIF("test_data.sif");
+
+cno_data=readMIDAS("test_data.csv");
+
 cnolist=makeCNOlist(cno_data,subfield=FALSE);
+
 ode_parameters=createLBodeContPars(
     model,
     LB_n = 1,
@@ -29,16 +36,9 @@ ode_parameters=createLBodeContPars(
     random = FALSE
     )
 
-
 print(ode_parameters)
 
-modelSim=plotLBodeModelSim(
-    cnolist,
-    model,
-    ode_parameters,
-    timeSignals=seq(0,2,0.5)
-    );
-
+modelSim=plotLBodeModelSim(cnolist,model,ode_parameters,timeSignals=seq(0,2,0.5));
 
 initial_pars=createLBodeContPars(
     model,
